@@ -4,6 +4,19 @@
 #define true 1  // definimos una constante llamada true con valor de 1
 #define false !(true) // definimos una constante llamada false con el valor inverso de true es decir 1
 int ip[4]; // definimos un vector de 4 enteros para almacenar los 4 octetos de una direccion ip
+char clase; // variable para guardar la clase de la ip
+char obtenerClase(int octeto){
+	//funcion que debuelve la clase de una ip
+	//verificando el primer octeto de la direccion ip
+	if(octeto >=0 && octeto <=127){
+		return 'A';
+	}else if(octeto >=128 && octeto <= 191){
+		return 'B';
+	}else{
+		return 'C';
+	}
+	
+}
 
 void inicializarVector(char *vector, int tam){{
 	// esta funcion permite inicar los valores de un vector de tipo char 
@@ -122,6 +135,7 @@ int validarIp(char *c){
 }
 
 int main(){
+	int op;
 	char cadip[20];
 	//creamos un vector de char para almacenar la ip del usuario
 	
@@ -135,17 +149,24 @@ int main(){
 		
 	
 		if(validarIp(cadip)){
-		printf("Ip valida: ");
+		printf("Ip valida, clase %c ",obtenerClase(ip[0]));
 		//verificamos que la ip sea una ip valida
 		
 	}else{
-		printf("Ip No valida: ");
+		printf("Ip No valida ");
 	}
 			printf("Ip:%d.%d.%d.%d\n",ip[0],ip[1],ip[2],ip[3]);
 		//imprimos la ip que nos proporciono el usuario
+		
+		printf("\nPresione 1 para salir");
+		scanf("%d",&op);
+		if(op){
+			break;
+		}
+		system("cls");
 	}
 	
-	printf("\nPresione cualquier tecla para ingresar otra");
+	
 	
 	//se espera que se precione una tecla
 	
