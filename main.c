@@ -4,6 +4,8 @@
 #define true 1  // definimos una constante llamada true con valor de 1
 #define false !(true) // definimos una constante llamada false con el valor inverso de true es decir 1
 int ip[4]; // definimos un vector de 4 enteros para almacenar los 4 octetos de una direccion ip
+char *ipBinario;
+
 char clase; // variable para guardar la clase de la ip
 char obtenerClase(int octeto){
 	//funcion que debuelve la clase de una ip
@@ -18,7 +20,7 @@ char obtenerClase(int octeto){
 	
 }
 
-void inicializarVector(char *vector, int tam){{
+void inicializarVector(char *vector, int tam){
 	// esta funcion permite inicar los valores de un vector de tipo char 
 	// el valor '\0'  hace referencia a vacio, el equivalente a 0 en los enteros
 	int i;
@@ -28,8 +30,38 @@ void inicializarVector(char *vector, int tam){{
 		vector[i] = '\0';
 	}
 }
+void completarCeros(char *binario, int ceros){
 	
 }
+
+void convertirABinario(int *ip){
+	int i;
+	int k = 0;
+	int aux = 0;
+	ipBinario = (char*)malloc(sizeof(char)*35);
+	inicializarVector(ipBinario,35);
+	
+	for(i=0; i<4; i++){
+		aux = ip[i];
+		while(aux != 0){
+			if(aux % 2 == 0){
+				aux /=2;
+				ipBinario[k++] = '0';
+			}else{
+				aux /=2;
+				ipBinario[k++] = '1';
+			}
+			
+		}
+		if (i != 3){
+			
+			ipBinario[k++] = '.';
+		}
+		 
+	}
+}
+	
+
 int octetoValido(int o, int primero){
 	//esta funcion valida sin un octeto esta dentro del rango de 0 - 255
 	if (primero){
@@ -151,7 +183,8 @@ int main(){
 		if(validarIp(cadip)){
 		printf("Ip valida, clase %c ",obtenerClase(ip[0]));
 		//verificamos que la ip sea una ip valida
-		
+		convertirABinario(ip);
+		printf("\nIp Binario: %s ",ipBinario);
 	}else{
 		printf("Ip No valida ");
 	}
